@@ -1,4 +1,4 @@
-FROM quay.io/openshift/origin-jenkins-agent-base
+FROM openshift/jenkins-slave-base-centos7
 MAINTAINER Snowdrop
 
 USER root
