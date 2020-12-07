@@ -1,0 +1,22 @@
+kind: "BuildConfig"
+apiVersion: "v1"
+metadata:
+  name: jenkins-agent-jjb
+spec:
+  source:
+    type: Git
+    git:
+      uri: "https://github.com/ch007m/jenkins-agent-jjb.git"
+      ref: main
+  strategy:
+    type: Docker
+    dockerStrategy:
+      noCache: true
+  output:
+    to:
+      kind: ImageStreamTag
+      name: "jenkins-agent-jjb:latest"
+  triggers:
+    - type: GitHub
+      github:
+        secret: "123"
