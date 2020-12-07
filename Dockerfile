@@ -15,7 +15,10 @@ RUN yum -y install epel-release && \
     # pip install --upgrade pip six 'python-jenkins==0.4.15' 'jenkins-job-builder==2.0.10' && \
     # for P in /tmp/patches/*.patch ; do patch --directory / --strip 0 < $P ; done && \
     # rm -rf /tmp/patches
-    pip install python-jenkins jenkins-job-builder
+    pip install python-jenkins jenkins-job-builder && \
+    # See https://number1.co.za/openshift-will-not-run-your-container-as-a-root-user/
+    RUN chgrp -R 0 /usr/local/bin/ && \
+        chmod -R g=u /usr/local/bin/
 
 COPY jenkins_jobs.ini /etc/jenkins_jobs/
 COPY jjb /usr/local/bin/
